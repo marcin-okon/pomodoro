@@ -18,9 +18,9 @@ def clear_previous_line() -> None:
 
 def parse_args() -> dict:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--work-time", type=int, required=True)
-    parser.add_argument("--break-time", type=int, required=True)
-    parser.add_argument("--iterations", type=int, required=True)
+    parser.add_argument("--work", type=int, required=True, help="Work period duration in minutes.")
+    parser.add_argument("--break", type=int, required=True, help="Break period duration in minutes.")
+    parser.add_argument("--iterations", type=int, required=True, help="Number of total interations.")
 
     return vars(parser.parse_known_args()[0])
 
@@ -34,7 +34,7 @@ def run_phase(seconds: int, label: str) -> None:
         stats=False,
         bar="blocks",
         spinner=None,
-        length=os.get_terminal_size().columns,
+        length=os.get_terminal_size().columns - 10,
     ) as bar:
         for _ in range(seconds):
             time.sleep(1)
@@ -60,8 +60,8 @@ def main(work_time: int, break_time: int, iterations: int) -> None:
 
 def entrypoint():
     args = parse_args()
-    work_time = args["work_time"]
-    break_time = args["break_time"]
+    work_time = args["work"]
+    break_time = args["break"]
     iterations = args["iterations"]
 
     main(work_time=work_time, break_time=break_time, iterations=iterations)
