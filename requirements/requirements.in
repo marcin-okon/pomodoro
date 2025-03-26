@@ -1,4 +1,3 @@
 ruff
 alive-progress
-textual
-
+setuptools

@@ -10,28 +10,8 @@ alive-progress==3.2.0
     # via -r ./requirements/requirements.in
 grapheme==0.6.0
     # via alive-progress
-linkify-it-py==2.0.3
-    # via markdown-it-py
-markdown-it-py[linkify,plugins]==3.0.0
-    # via
-    #   mdit-py-plugins
-    #   rich
-    #   textual
-mdit-py-plugins==0.4.2
-    # via markdown-it-py
-mdurl==0.1.2
-    # via markdown-it-py
-platformdirs==4.3.7
-    # via textual
-pygments==2.19.1
-    # via rich
-rich==13.9.4
-    # via textual
 ruff==0.9.6
     # via -r ./requirements/requirements.in
-textual==2.1.2
-    # via -r ./requirements/requirements.in
-typing-extensions==4.12.2
-    # via textual
-uc-micro-py==1.0.3
-    # via linkify-it-py
+
+# The following packages are considered to be unsafe in a requirements file:
+# setuptools
