@@ -34,7 +34,7 @@ def run_phase(seconds: int, label: str) -> None:
         stats=False,
         bar="blocks",
         spinner=None,
-        length=os.get_terminal_size().columns - 10,
+        length=os.get_terminal_size().columns - len(label),
     ) as bar:
         for _ in range(seconds):
             time.sleep(1)

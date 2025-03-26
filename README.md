@@ -48,12 +48,12 @@ make deps
 Run the timer by specifying the work time, break time, and the number of iterations. For example:
 
 ```
-pomodoro --work-time 25 --break-time 5 --iterations 4
+pomodoro --work 25 --break 5 --iterations 4
 ```
 ### Command-line Arguments
-```--work-time```: Duration of each work session (in minutes).
+```--work```: Duration of each work session (in minutes).
 
-```--break-time```: Duration of each break session (in minutes).
+```--break```: Duration of each break session (in minutes).
 
 ```--iterations```: Number of work/break cycles.
 
