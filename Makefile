@@ -1,5 +1,5 @@
 format:
-	ruff format ./src
+	ruff format ./
 	ruff check --fix
 
 deps:

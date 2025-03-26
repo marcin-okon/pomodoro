@@ -55,7 +55,7 @@ def main(work_time: int, break_time: int, iterations: int) -> None:
     send_notification("Work Done", f"Congrats, you have done {work_time * iterations} minutes of work!")
 
 
-if __name__ == "__main__":
+def entrypoint():
     args = parse_args()
     work_time = args["work_time"]
     break_time = args["break_time"]
