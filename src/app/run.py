@@ -8,7 +8,8 @@ from alive_progress import alive_bar
 def send_notification(title: str, message: str) -> None:
     t = "-title {!r}".format(title)
     m = "-message {!r}".format(message)
-    os.system("terminal-notifier {}".format(" ".join([m, t])))
+    s = "-sound Hero"
+    os.system("terminal-notifier {}".format(" ".join([m, t, s])))
 
 
 def clear_previous_line() -> None:
@@ -47,10 +48,12 @@ def main(work_time: int, break_time: int, iterations: int) -> None:
     for i in range(1, iterations + 1):
         send_notification("Work Time", f"🍅 Iteration {i} begins now!")
         run_phase(work_time_seconds, f"🍅 Work #{i}")
+        clear_previous_line()
 
         if i < iterations:
             send_notification("Break Time", f"☕ Take a {break_time}-minute break.")
             run_phase(break_time_seconds, f"☕ Break #{i}")
+            clear_previous_line()
 
     send_notification("Work Done", f"Congrats, you have done {work_time * iterations} minutes of work!")
 
