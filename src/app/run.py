@@ -32,6 +32,18 @@ def run_phase(seconds: int, label: str) -> None:
         time.sleep(1)
 
 
+def print_summary(work_time: float, break_time: float, iterations: int) -> None:
+    total_work_time = work_time * iterations
+    total_break_time = break_time * break_time
+    tick_code = "\u2705"
+    print(
+        f"{tick_code * 3} "
+        f"You accomplished {total_work_time} minutes of work, and took "
+        f"{total_break_time} minutes of break. "
+        f"{tick_code * 3}"
+    )
+
+
 def entrypoint():
     args = parse_args()
     work_time = args["work"]
@@ -49,3 +61,4 @@ def entrypoint():
             run_phase(break_time_seconds, f"☕ Break #{i}")
 
     send_notification("Work Done", f"Congrats, you have done {work_time * iterations} minutes of work!")
+    print_summary(work_time, break_time, iterations)
