@@ -1,13 +1,12 @@
 import argparse
 import os
+import subprocess
 import time
 
 
 def send_notification(title: str, message: str) -> None:
-    t = "-title {!r}".format(title)
-    m = "-message {!r}".format(message)
-    s = "-sound Hero"
-    os.system("terminal-notifier {}".format(" ".join([m, t, s])))
+    args = ["terminal-notifier", "-message", message, "-title", title, "-sound", "Hero"]
+    subprocess.run(args, check=True)
 
 
 def clear_previous_line() -> None:
@@ -19,8 +18,7 @@ def parse_args() -> dict:
     parser.add_argument("--work", type=float, required=True, help="Work period duration in minutes.")
     parser.add_argument("--break", type=float, required=True, help="Break period duration in minutes.")
     parser.add_argument("--iterations", type=int, required=True, help="Number of total interations.")
-
-    return vars(parser.parse_known_args()[0])
+    return vars(parser.parse_args())
 
 
 def run_phase(seconds: int, label: str) -> None:
