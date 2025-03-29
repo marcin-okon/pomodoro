@@ -2,8 +2,6 @@ import argparse
 import os
 import time
 
-from alive_progress import alive_bar
-
 
 def send_notification(title: str, message: str) -> None:
     t = "-title {!r}".format(title)
@@ -18,44 +16,22 @@ def clear_previous_line() -> None:
 
 def parse_args() -> dict:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--work", type=int, required=True, help="Work period duration in minutes.")
-    parser.add_argument("--break", type=int, required=True, help="Break period duration in minutes.")
+    parser.add_argument("--work", type=float, required=True, help="Work period duration in minutes.")
+    parser.add_argument("--break", type=float, required=True, help="Break period duration in minutes.")
     parser.add_argument("--iterations", type=int, required=True, help="Number of total interations.")
 
     return vars(parser.parse_known_args()[0])
 
 
 def run_phase(seconds: int, label: str) -> None:
-    with alive_bar(
-        seconds,
-        title=f"{label}",
-        elapsed=False,
-        monitor=False,
-        stats=False,
-        bar="blocks",
-        spinner=None,
-        length=os.get_terminal_size().columns - len(label),
-    ) as bar:
-        for _ in range(seconds):
-            time.sleep(1)
-            bar()
-
-
-def main(work_time: int, break_time: int, iterations: int) -> None:
-    work_time_seconds = work_time * 60
-    break_time_seconds = break_time * 60
-
-    for i in range(1, iterations + 1):
-        send_notification("Work Time", f"🍅 Iteration {i} begins now!")
-        run_phase(work_time_seconds, f"🍅 Work #{i}")
+    terminal_width = os.get_terminal_size().columns
+    terminal_width_label_spaced = terminal_width - len(label) - 5
+    for second in range(seconds):
         clear_previous_line()
-
-        if i < iterations:
-            send_notification("Break Time", f"☕ Take a {break_time}-minute break.")
-            run_phase(break_time_seconds, f"☕ Break #{i}")
-            clear_previous_line()
-
-    send_notification("Work Done", f"Congrats, you have done {work_time * iterations} minutes of work!")
+        symbols_count = int(terminal_width_label_spaced * second // seconds)
+        symbols_to_print = ("#" * symbols_count) + ((terminal_width_label_spaced - symbols_count) * "-")
+        print(f"{label}: |{symbols_to_print}|")
+        time.sleep(1)
 
 
 def entrypoint():
@@ -63,5 +39,15 @@ def entrypoint():
     work_time = args["work"]
     break_time = args["break"]
     iterations = args["iterations"]
+    work_time_seconds = int(work_time * 60)
+    break_time_seconds = int(break_time * 60)
 
-    main(work_time=work_time, break_time=break_time, iterations=iterations)
+    for i in range(1, iterations + 1):
+        send_notification("Work Time", f"🍅 Iteration {i} begins now!")
+        run_phase(work_time_seconds, f"🍅 Work #{i}")
+
+        if i < iterations:
+            send_notification("Break Time", f"☕ Take a {break_time}-minute break.")
+            run_phase(break_time_seconds, f"☕ Break #{i}")
+
+    send_notification("Work Done", f"Congrats, you have done {work_time * iterations} minutes of work!")
