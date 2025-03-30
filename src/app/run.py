@@ -1,7 +1,8 @@
-import argparse
 import os
 import subprocess
 import time
+
+from app import cli
 
 
 def send_notification(title: str, message: str) -> None:
@@ -11,14 +12,6 @@ def send_notification(title: str, message: str) -> None:
 
 def clear_previous_line() -> None:
     print("\033[F\033[K", end="")
-
-
-def parse_args() -> dict:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--work", type=float, required=True, help="Work period duration in minutes.")
-    parser.add_argument("--break", type=float, required=True, help="Break period duration in minutes.")
-    parser.add_argument("--iterations", type=int, required=True, help="Number of total interations.")
-    return vars(parser.parse_args())
 
 
 def run_phase(seconds: int, label: str) -> None:
@@ -32,20 +25,21 @@ def run_phase(seconds: int, label: str) -> None:
         time.sleep(1)
 
 
-def print_summary(work_time: float, break_time: float, iterations: int) -> None:
+def form_summary(work_time: float, break_time: float, iterations: int) -> str:
     total_work_time = work_time * iterations
-    total_break_time = break_time * break_time
+    total_break_time = (break_time * iterations) if iterations > 1 else 0
     tick_code = "\u2705"
-    print(
-        f"{tick_code * 3} "
+    summmary = (
+        f"{tick_code * 3} \n"
         f"You accomplished {total_work_time} minutes of work, and took "
         f"{total_break_time} minutes of break. "
-        f"{tick_code * 3}"
+        f"\n{tick_code * 3}"
     )
+    return summmary
 
 
 def entrypoint():
-    args = parse_args()
+    args = cli.parse_args()
     work_time = args["work"]
     break_time = args["break"]
     iterations = args["iterations"]
@@ -60,5 +54,7 @@ def entrypoint():
             send_notification("Break Time", f"☕ Take a {break_time}-minute break.")
             run_phase(break_time_seconds, f"☕ Break #{i}")
 
-    send_notification("Work Done", f"Congrats, you have done {work_time * iterations} minutes of work!")
-    print_summary(work_time, break_time, iterations)
+    summary = form_summary(work_time, break_time, iterations)
+
+    send_notification("Done!", summary)
+    print(summary)

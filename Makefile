@@ -10,3 +10,7 @@ deps:
 	pip install -r ./requirements/requirements.txt
 
 
+test:
+	pytest ./tests
+
+
