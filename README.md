@@ -48,12 +48,12 @@ make deps
 Run the timer by specifying the work time, break time, and the number of iterations. For example:
 
 ```
-pomodoro --work 25 --break 5 --iterations 4
+pomodoro --work 1h10m --break 25m --iterations 4
 ```
 ### Command-line Arguments
-```--work```: Duration of each work session (in minutes).
+```--work```: Duration of each work session (in time type eg. 1h30m, 20m, 1h).
 
-```--break```: Duration of each break session (in minutes).
+```--break```: Duration of each break session (in time type eg. 1h30m, 20m, 1h).
 
 ```--iterations```: Number of work/break cycles.
 
@@ -65,6 +65,14 @@ This project uses Ruff for code formatting and linting. To automatically format 
 
 ```
 make format
+```
+
+## Tests 
+### Run pytest tests 
+This project uses pytest for code testing. To runn all of the tests, run:
+
+```
+make test 
 ```
 
 ## License
