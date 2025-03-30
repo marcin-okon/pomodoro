@@ -6,7 +6,15 @@ from app import cli
 
 
 def send_notification(title: str, message: str) -> None:
-    args = ["terminal-notifier", "-message", message, "-title", title, "-sound", "Hero"]
+    args = [
+        "terminal-notifier",
+        "-message",
+        message,
+        "-title",
+        title,
+        "-sound",
+        "Hero",
+    ]
     subprocess.run(args, check=True)
 
 
@@ -20,7 +28,9 @@ def run_phase(seconds: int, label: str) -> None:
     for second in range(seconds):
         clear_previous_line()
         symbols_count = int(terminal_width_label_spaced * second // seconds)
-        symbols_to_print = ("#" * symbols_count) + ((terminal_width_label_spaced - symbols_count) * "-")
+        symbols_to_print = ("#" * symbols_count) + (
+            (terminal_width_label_spaced - symbols_count) * "-"
+        )
         print(f"{label}: |{symbols_to_print}|")
         time.sleep(1)
 
@@ -51,7 +61,9 @@ def entrypoint():
         run_phase(work_time_seconds, f"🍅 Work #{i}")
 
         if i < iterations:
-            send_notification("Break Time", f"☕ Take a {break_time}-minute break.")
+            send_notification(
+                "Break Time", f"☕ Take a {break_time}-minute break."
+            )
             run_phase(break_time_seconds, f"☕ Break #{i}")
 
     summary = form_summary(work_time, break_time, iterations)

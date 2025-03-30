@@ -4,12 +4,23 @@ import argparse
 def parse_args() -> dict:
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--work", type=time_type, required=True, help="Work period duration in time format eg. 1h30m, 30m, 1h."
+        "--work",
+        type=time_type,
+        required=True,
+        help="Work period duration in time format eg. 1h30m, 30m, 1h.",
     )
     parser.add_argument(
-        "--break", type=time_type, required=True, help="Break period duration in minutes eg. 1h30m, 30m, 1h."
+        "--break",
+        type=time_type,
+        required=True,
+        help="Break period duration in minutes eg. 1h30m, 30m, 1h.",
     )
-    parser.add_argument("--iterations", type=int, required=True, help="Number of total interations.")
+    parser.add_argument(
+        "--iterations",
+        type=int,
+        required=True,
+        help="Number of total interations.",
+    )
     return vars(parser.parse_args())
 
 
