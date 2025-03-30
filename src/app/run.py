@@ -37,13 +37,12 @@ def run_phase(seconds: int, label: str) -> None:
 
 def form_summary(work_time: float, break_time: float, iterations: int) -> str:
     total_work_time = work_time * iterations
-    total_break_time = (break_time * iterations) if iterations > 1 else 0
-    tick_code = "\u2705"
+    total_break_time = break_time * (iterations - 1)
     summmary = (
-        f"{tick_code * 3} \n"
+        "✅✅✅\n"
         f"You accomplished {total_work_time} minutes of work, and took "
         f"{total_break_time} minutes of break. "
-        f"\n{tick_code * 3}"
+        "\n✅✅✅"
     )
     return summmary
 

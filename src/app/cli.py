@@ -25,6 +25,12 @@ def parse_args() -> dict[str, Any]:
     return vars(parser.parse_args())
 
 
+def iterations_type(input: int) -> int:
+    if input < 0:
+        raise ValueError("Number of iterations cannot be negative.")
+    return input
+
+
 def time_type(input: str) -> int:
     if any(i not in "0123456789hm" for i in input):
         raise ValueError("Invalid format of the input")
