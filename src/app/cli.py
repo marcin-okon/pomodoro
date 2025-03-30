@@ -19,6 +19,7 @@ def time_type(input: str) -> int:
 
     if not input:
         raise ValueError("Input cannot be empty")
+
     input = input.lower()
     minutes = 0
     stack = list(input)
@@ -39,4 +40,5 @@ def time_type(input: str) -> int:
 
     if minutes == 0:
         raise ValueError("0 minutes is not a valid input")
+
     return minutes
