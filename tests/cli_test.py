@@ -32,3 +32,12 @@ def test_malformed_input() -> None:
 
 def test_no_time_marker_input() -> None:
     assert cli.time_type("17") == 17
+
+
+def test_iteration_input_valid() -> None:
+    assert cli.iterations_type(7) == 7
+
+
+def test_iteration_input_negative() -> None:
+    with pytest.raises(ValueError):
+        cli.iterations_type(-1)
