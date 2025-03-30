@@ -6,7 +6,7 @@ format:
 	ruff check --fix
 
 check:
-	ruff check
+	ruff check ./
 
 deps:
 	pip-compile --resolver=backtracking -v -r ./requirements/requirements.in 
@@ -15,5 +15,4 @@ deps:
 
 test:
 	pytest ./tests
-
 
