@@ -1,7 +1,8 @@
 import argparse
+from typing import Any
 
 
-def parse_args() -> dict:
+def parse_args() -> dict[str, Any]:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--work",

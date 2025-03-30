@@ -7,6 +7,7 @@ format:
 
 check:
 	ruff check .
+	mypy .
 
 deps:
 	pip-compile --resolver=backtracking -v -r ./requirements/requirements.in 

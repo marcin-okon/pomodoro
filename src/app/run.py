@@ -48,7 +48,7 @@ def form_summary(work_time: float, break_time: float, iterations: int) -> str:
     return summmary
 
 
-def entrypoint():
+def entrypoint() -> None:
     args = cli.parse_args()
     work_time = args["work"]
     break_time = args["break"]
