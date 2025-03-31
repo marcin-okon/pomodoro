@@ -53,6 +53,11 @@ def time_type(input: str) -> int:
             curr_frag = curr_frag + el
             while stack and stack[-1] not in "hm":
                 curr_frag += stack.pop()
+            curr_minutes = int(curr_frag[::-1])
+
+            if multiplier == 1 and curr_minutes > 59:
+                raise ValueError("Minutes exceed 59.")
+
             minutes += int(curr_frag[::-1]) * multiplier
             curr_frag = ""
 

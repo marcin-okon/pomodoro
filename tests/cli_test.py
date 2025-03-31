@@ -34,6 +34,11 @@ def test_no_time_marker_input() -> None:
     assert cli.time_type("17") == 17
 
 
+def test_minutes_over_59_input() -> None:
+    with pytest.raises(ValueError):
+        cli.time_type("1h90m")
+
+
 def test_iteration_input_valid() -> None:
     assert cli.iterations_type(7) == 7
 
