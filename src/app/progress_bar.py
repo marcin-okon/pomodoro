@@ -1,19 +1,28 @@
 import os
 import time
 
+import wcwidth
+
 
 def clear_previous_line() -> None:
     print("\033[F\033[K", end="")
 
 
-def run_phase(seconds: int, label: str, progress_mark: str = "#") -> None:
+def run_phase(seconds: int, label: str, progress_mark: str = "🔥") -> None:
     terminal_width = os.get_terminal_size().columns
-    terminal_width_label_spaced = terminal_width - len(label) - 5
-    for second in range(seconds):
+    available_width = terminal_width - len(label) - 5
+
+    mark_width = wcwidth.wcswidth(progress_mark)
+
+    for second in range(seconds + 1):
         clear_previous_line()
-        symbols_count = int(terminal_width_label_spaced * second // seconds)
-        symbols_to_print = (progress_mark * symbols_count) + (
-            (terminal_width_label_spaced - symbols_count) * "-"
-        )
-        print(f"{label}: |{symbols_to_print}|")
+        progress_fraction = second / seconds
+        filled_columns = int(available_width * progress_fraction)
+        count = filled_columns // mark_width if mark_width else 0
+        progress_bar = progress_mark * count
+
+        remaining_columns = available_width - wcwidth.wcswidth(progress_bar)
+        progress_bar += "-" * remaining_columns
+
+        print(f"{label}: |{progress_bar}|", flush=True)
         time.sleep(1)

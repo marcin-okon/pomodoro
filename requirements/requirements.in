@@ -1,4 +1,5 @@
 ruff
+wcwidth
 mypy
 pytest
 setuptools

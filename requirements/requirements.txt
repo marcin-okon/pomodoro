@@ -20,6 +20,8 @@ ruff==0.9.6
     # via -r ./requirements/requirements.in
 typing-extensions==4.13.0
     # via mypy
+wcwidth==0.2.13
+    # via -r ./requirements/requirements.in
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools

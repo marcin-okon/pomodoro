@@ -24,9 +24,9 @@ def parse_args() -> dict[str, Any]:
     )
     parser.add_argument(
         "--progress-mark",
-        type=progress_mark_type,
+        type=str,
         required=False,
-        default="#",
+        default="🔥",
         help="Symbol showed on the progress bar",
     )
     parser.add_argument(
@@ -52,12 +52,6 @@ def parse_args() -> dict[str, Any]:
         default="Hero",
     )
     return vars(parser.parse_args())
-
-
-def progress_mark_type(input: str) -> str:
-    if len(input) > 1:
-        raise ValueError("Len of progress mark has to be 1")
-    return input
 
 
 def iterations_type(input: int) -> int:
