@@ -22,7 +22,42 @@ def parse_args() -> dict[str, Any]:
         required=True,
         help="Number of total interations.",
     )
+    parser.add_argument(
+        "--progress-mark",
+        type=progress_mark_type,
+        required=False,
+        default="#",
+        help="Symbol showed on the progress bar",
+    )
+    parser.add_argument(
+        "--notification-sound",
+        type=str,
+        choices=[
+            "Basso",
+            "Blow",
+            "Bottle",
+            "Frog",
+            "Funk",
+            "Glass",
+            "Hero",
+            "Morse",
+            "Ping",
+            "Pop",
+            "Purr",
+            "Sosumi",
+            "Submarine",
+            "Tink",
+        ],
+        required=False,
+        default="Hero",
+    )
     return vars(parser.parse_args())
+
+
+def progress_mark_type(input: str) -> str:
+    if len(input) > 1:
+        raise ValueError("Len of progress mark has to be 1")
+    return input
 
 
 def iterations_type(input: int) -> int:
