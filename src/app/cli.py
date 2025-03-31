@@ -61,6 +61,12 @@ def iterations_type(input: int) -> int:
 
 
 def time_type(input: str) -> int:
+    if "hm" in input or "mh" in input:
+        raise ValueError("Invalid Input")
+
+    if input in ["h", "m"]:
+        raise ValueError("Invalid Input")
+
     if any(i not in "0123456789hm" for i in input):
         raise ValueError("Invalid format of the input")
 
