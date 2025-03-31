@@ -24,7 +24,7 @@ def parse_args() -> dict[str, Any]:
     )
     parser.add_argument(
         "--progress-mark",
-        type=str,
+        type=progress_mark_type,
         required=False,
         default="🔥",
         help="Symbol showed on the progress bar",
@@ -94,3 +94,9 @@ def time_type(input: str) -> int:
         raise ValueError("0 minutes is not a valid input")
 
     return minutes
+
+
+def progress_mark_type(input: str) -> str:
+    if len(input) > 5:
+        raise ValueError("Length of the progressMark cannot exceed 5")
+    return input

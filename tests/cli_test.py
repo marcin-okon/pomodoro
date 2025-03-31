@@ -46,3 +46,12 @@ def test_iteration_input_valid() -> None:
 def test_iteration_input_negative() -> None:
     with pytest.raises(ValueError):
         cli.iterations_type(-1)
+
+
+def test_progress_mark_valid_len() -> None:
+    assert cli.progress_mark_type("$%#") == "$%#"
+
+
+def test_progress_mark_invalid_len() -> None:
+    with pytest.raises(ValueError):
+        cli.progress_mark_type("MMMMMMMMMMMMMM")
